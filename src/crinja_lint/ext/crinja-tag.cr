@@ -106,9 +106,16 @@ class Crinja::Tag::If
 end
 
 class Crinja::Tag::Import
-  def validate_arguments(tag_node : AST::TagNode, env : Crinja) : AST::ExpressionNode
+  def validate_arguments(tag_node : AST::TagNode, env : Crinja) : {AST::ExpressionNode, String?}
     parser = ArgumentsParser.new(tag_node.arguments, env.config)
-    parser.parse_expression
+    name_expr = parser.parse_expression
+
+    context_var = parser.if_identifier "as" do
+      parser.next_token
+      parser.current_token.value
+    end
+
+    {name_expr, context_var}
   ensure
     parser.try &.close
   end
