@@ -24,7 +24,11 @@ module CrinjaLint
     sources.each do |source|
       syntax_rule.test(source)
 
+      next if !source.valid?
+
       rules.each do |rule|
+        next if rule.special?
+
         rule.test(source)
       end
 
@@ -34,9 +38,11 @@ module CrinjaLint
   end
 end
 
+require "./crinja_lint/ext/*"
 require "./crinja_lint/glob_utils"
 require "./crinja_lint/issue"
 require "./crinja_lint/source"
 require "./crinja_lint/formatter/*"
+require "./crinja_lint/ast/**"
 require "./crinja_lint/rule/base"
 require "./crinja_lint/rule/**"

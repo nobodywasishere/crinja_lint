@@ -20,6 +20,12 @@ module CrinjaLint
       end
 
       def test(source)
+        visitor = AST::NodeVisitor.new(self, source)
+
+        source.ast.accept(visitor)
+      end
+
+      def test(source, node : Crinja::AST::ASTNode)
       end
 
       def name
