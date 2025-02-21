@@ -5,7 +5,7 @@ module CrinjaLint::Rule
     MSG = "Useless assignment to `%s`"
 
     def test(source)
-      @visitor = visitor = AST::NodeVisitor.new(self, source)
+      visitor = AST::TagVisitor.new(self, source)
 
       source.ast.accept(visitor)
 
@@ -19,70 +19,53 @@ module CrinjaLint::Rule
       end
 
       @assigns.clear
+    rescue Crinja::TemplateSyntaxError | Crinja::SecurityError | Crinja::FeatureLibrary::UnknownFeatureError
+      # These are already handled by `Lint/Tag`
     end
 
-    # ameba:disable Metrics/CyclomaticComplexity
-    def test(source, node : Crinja::AST::TagNode)
-      # These should be moved to a `TagVisitor`
-      case tag = source.env.tags[node.name]
-      when Crinja::Tag::Set
-        variables = tag.validate_arguments(node, source.env)
+    def test(source, node : Crinja::AST::ASTNode, tag : Crinja::Tag::Set)
+      variables = tag.validate_arguments(node, source.env)
 
-        variables.each do |variable, _|
-          @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
-        end
-
-        if visitor = @visitor
-          variables.each_value(&.accept(visitor))
-        end
-      when Crinja::Tag::For
-        variables, collection_expr, if_expr, _ = tag.validate_arguments(node, source.env)
-
-        if visitor = @visitor
-          collection_expr.accept(visitor)
-          if_expr.try(&.accept(visitor))
-        end
-
-        variables.each do |variable|
-          @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
-        end
-      when Crinja::Tag::If, Crinja::Tag::If::Elif
-        expr = tag.validate_arguments(node, source.env)
-
-        if visitor = @visitor
-          expr.accept(visitor)
-        end
-      when Crinja::Tag::With
-        variables = tag.validate_arguments(node, source.env)
-
-        variables.each do |variable, _|
-          @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
-        end
-      when Crinja::Tag::Call
-        defaults, call = tag.validate_arguments(node, source.env)
-
-        defaults.each do |variable, _|
-          @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
-        end
-
-        if visitor = @visitor
-          call.accept(visitor)
-        end
-      when Crinja::Tag::Import
-        # Any assigns that have occurred so far could be used by the imported template.
-        @assigns.clear
-
-        name_expr, _ = tag.validate_arguments(node, source.env)
-
-        if visitor = @visitor
-          name_expr.accept(visitor)
-        end
-      when Crinja::Tag::Extends
-        # Any assigns that have occurred so far could be used by the imported template.
-        @assigns.clear
+      variables.each do |variable, _|
+        @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
       end
     rescue Crinja::TemplateSyntaxError | Crinja::SecurityError | Crinja::FeatureLibrary::UnknownFeatureError
       # These are already handled by `Lint/Tag`
+    end
+
+    def test(source, node : Crinja::AST::ASTNode, tag : Crinja::Tag::For)
+      variables, _, _, _ = tag.validate_arguments(node, source.env)
+
+      variables.each do |variable|
+        @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
+      end
+    rescue Crinja::TemplateSyntaxError | Crinja::SecurityError | Crinja::FeatureLibrary::UnknownFeatureError
+      # These are already handled by `Lint/Tag`
+    end
+
+    def test(source, node : Crinja::AST::ASTNode, tag : Crinja::Tag::With)
+      variables = tag.validate_arguments(node, source.env)
+
+      variables.each do |variable, _|
+        @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
+      end
+    rescue Crinja::TemplateSyntaxError | Crinja::SecurityError | Crinja::FeatureLibrary::UnknownFeatureError
+      # These are already handled by `Lint/Tag`
+    end
+
+    def test(source, node : Crinja::AST::ASTNode, tag : Crinja::Tag::Call)
+      defaults, _ = tag.validate_arguments(node, source.env)
+
+      defaults.each do |variable, _|
+        @assigns[variable] = node.arguments.find(node) { |i| i.value == variable }
+      end
+    rescue Crinja::TemplateSyntaxError | Crinja::SecurityError | Crinja::FeatureLibrary::UnknownFeatureError
+      # These are already handled by `Lint/Tag`
+    end
+
+    def test(source, node : Crinja::AST::ASTNode, tag : Crinja::Tag::Import | Crinja::Tag::Extends)
+      # Any assigns that have occurred so far could be used by the imported template.
+      @assigns.clear
     end
 
     def test(source, node : Crinja::AST::IdentifierLiteral)

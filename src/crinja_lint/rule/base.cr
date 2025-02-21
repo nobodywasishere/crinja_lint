@@ -28,6 +28,9 @@ module CrinjaLint
       def test(source, node : Crinja::AST::ASTNode)
       end
 
+      def test(source, node : Crinja::AST::ASTNode, *args)
+      end
+
       def name
         {{ @type }}.rule_name
       end
