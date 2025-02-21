@@ -1,6 +1,7 @@
 # https://github.com/crystal-ameba/ameba/blob/master/src/ameba/glob_utils.cr
+#
 # Helper module that is utilizes helpers for working with globs.
-module GlobUtils
+module CrinjaLint::GlobUtils
   extend self
 
   # Returns all files that match specified globs.
