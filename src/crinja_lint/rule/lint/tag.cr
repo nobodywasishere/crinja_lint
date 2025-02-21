@@ -33,6 +33,13 @@ module CrinjaLint::Rule
         MSG_UNKNOWN % node.name,
         self
       )
+    rescue ex
+      source.add_issue(
+        node.location_start,
+        node.location_end,
+        ex.message.try &.split("\n").first || "Unknown error",
+        self
+      )
     end
   end
 end
