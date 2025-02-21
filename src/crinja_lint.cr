@@ -12,12 +12,17 @@ module CrinjaLint
 
   def self.run
     files = GlobUtils.find_files_by_globs(DEFAULT_GLOBS)
-    env = Crinja.new
 
     syntax_rule = Rule::Lint::Syntax.new
     rules = Rule.rules.map(&.new)
 
-    sources = files.map { |file| Source.new(env, file, File.read(file)) }
+    sources = files.map do |file|
+      # Each file should have its own env / context
+      env = Crinja.new
+
+      Source.new(env, file, File.read(file))
+    end
+
     formatter = DotFormatter.new
 
     formatter.started(sources)
