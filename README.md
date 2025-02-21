@@ -4,11 +4,18 @@ Linter for [Crinja](https://github.com/straight-shoota/crinja), heavily based on
 
 ## Installation
 
-TODO: Write installation instructions here
+```sh
+$ shards build crinja_lint
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Command-line interface still in progress. For now, will lint all `*.html.j2` and `*.jinja2` files in the current directory.
+
+```sh
+$ crinja_lint
+...
+```
 
 ## Development
 
