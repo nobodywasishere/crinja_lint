@@ -36,7 +36,7 @@ module CrinjaLint
             output.print " " * (location.column - 1)
 
             if (location_end = issue.location_end) && location_end.line == location.line
-              output.puts "^" * (location_end.column - location.column + 1)
+              output.puts "^" * (location_end.column - location.column)
             else
               output.puts "^"
             end
