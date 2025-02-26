@@ -10,6 +10,8 @@ module CrinjaLint::Rule
       source.ast.accept(visitor)
 
       @assigns.each do |name, arg|
+        next if name.starts_with?("_")
+
         source.add_issue(
           arg.location_start,
           arg.location_end,
