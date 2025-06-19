@@ -13,10 +13,10 @@ module Ameba
     getter rule : Rule::Base
 
     # Location of the issue.
-    getter location : Crystal::Location?
+    getter location : Crinja::Parser::StreamPosition?
 
     # End location of the issue.
-    getter end_location : Crystal::Location?
+    getter end_location : Crinja::Parser::StreamPosition?
 
     # Issue message.
     getter message : String

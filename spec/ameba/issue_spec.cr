@@ -15,7 +15,7 @@ module Ameba
     end
 
     it "accepts location" do
-      location = Crystal::Location.new("path", 3, 2)
+      location = Crinja::Parser::StreamPosition.new("path", 3, 2)
       issue = Issue.new code: "",
         rule: DummyRule.new,
         location: location,
@@ -28,7 +28,7 @@ module Ameba
     end
 
     it "accepts end_location" do
-      location = Crystal::Location.new("path", 3, 2)
+      location = Crinja::Parser::StreamPosition.new("path", 3, 2)
       issue = Issue.new code: "",
         rule: DummyRule.new,
         location: nil,

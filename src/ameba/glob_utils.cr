@@ -25,11 +25,7 @@ module Ameba
       globs
         .flat_map do |glob|
           if File.directory?(glob)
-            ext = ".cr"
-
-            Ameba.ecr_supported? do
-              ext = ".{cr,ecr}"
-            end
+            ext = ".{html.j2,jinja2}"
 
             glob += "/**/*#{ext}"
           end

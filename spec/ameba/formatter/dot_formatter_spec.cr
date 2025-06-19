@@ -24,7 +24,7 @@ module Ameba::Formatter
 
       it "writes invalid source" do
         s = Source.new
-        s.add_issue DummyRule.new, Crystal::Nop.new, "message"
+        s.add_issue DummyRule.new, {0, 0}, "message"
         subject.source_finished s
         output.to_s.should contain "F"
       end

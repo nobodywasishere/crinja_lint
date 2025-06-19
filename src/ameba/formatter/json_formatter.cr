@@ -125,8 +125,8 @@ module Ameba::Formatter
     record Issue,
       rule_name : String,
       severity : String,
-      location : Crystal::Location?,
-      end_location : Crystal::Location?,
+      location : Crinja::Parser::StreamPosition?,
+      end_location : Crinja::Parser::StreamPosition?,
       message : String do
       def to_json(json)
         {
@@ -147,11 +147,13 @@ module Ameba::Formatter
 
     record Metadata,
       ameba_version : String = Ameba::VERSION,
-      crystal_version : String = Crystal::VERSION do
+      crystal_version : String = Crystal::VERSION,
+      crinja_version : String = Crinja::VERSION do
       def to_json(json)
         {
-          ameba_version:   ameba_version,
-          crystal_version: crystal_version,
+          crinja_lint_version: ameba_version,
+          crinja_version:      crinja_version,
+          crystal_version:     crystal_version,
         }.to_json(json)
       end
     end

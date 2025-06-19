@@ -12,14 +12,9 @@ module Ameba::Rule
       it "contains rules across all the available groups" do
         Rule.rules.map(&.group_name).uniq!.reject!(&.empty?).sort.should eq %w[
           Ameba
-          Documentation
           Layout
           Lint
-          Metrics
-          Naming
-          Performance
           Style
-          Typing
         ]
       end
     end
@@ -70,13 +65,7 @@ module Ameba::Rule
       it "returns false if source does not match the wildcard" do
         rule = DummyRule.new
         rule.excluded = %w[*_spec.cr]
-        rule.excluded?(Source.new path: "source.cr").should be_false
-      end
-    end
-
-    describe ".parsed_doc" do
-      it "returns the parsed rule doc" do
-        DummyRule.parsed_doc.should eq "Dummy Rule which does nothing."
+        rule.excluded?(Source.new "", "source.cr").should be_false
       end
     end
 
@@ -86,7 +75,7 @@ module Ameba::Rule
       end
 
       it "returns false if rule has a different name" do
-        DummyRule.new.should_not eq(ScopeRule.new)
+        DummyRule.new.should_not eq(NamedRule.new)
       end
     end
   end

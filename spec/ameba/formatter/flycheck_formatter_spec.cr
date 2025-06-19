@@ -39,7 +39,7 @@ module Ameba::Formatter
 
       it "reports nothing if location was not set" do
         s = Source.new "a = 1", "source.cr"
-        s.add_issue DummyRule.new, Crystal::Nop.new, "message"
+        s.add_issue DummyRule.new, {0, 0}, "message"
 
         subject.source_finished s
         subject.output.to_s.should eq ""

@@ -14,7 +14,7 @@ all:
 
 -include Makefile.local # for optional local options
 
-BUILD_TARGET := bin/ameba
+BUILD_TARGET := bin/crinja_lint
 
 DESTDIR ?=          ## Install destination dir
 PREFIX ?= /usr/local## Install path prefix
@@ -70,7 +70,7 @@ clean:
 install: ## Install application binary into $DESTDIR
 install: $(BUILD_TARGET)
 	mkdir -p "$(BINDIR)"
-	$(INSTALL_BIN) -m 0755 "$(BUILD_TARGET)" "$(BINDIR)/ameba"
+	$(INSTALL_BIN) -m 0755 "$(BUILD_TARGET)" "$(BINDIR)/crinja_lint"
 
 .PHONY: help
 help: ## Show this help

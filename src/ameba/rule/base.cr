@@ -35,11 +35,15 @@ module Ameba::Rule
     #
     # NOTE: Must be overridden for other type of rules.
     def test(source : Source)
-      AST::NodeVisitor.new self, source
+      visitor = AST::NodeVisitor.new self, source
+
+      source.ast.accept(visitor)
     end
 
-    # NOTE: Can't be abstract
-    def test(source : Source, node : Crystal::ASTNode, *opts)
+    def test(source, node : Crinja::AST::ASTNode)
+    end
+
+    def test(source, node : Crinja::AST::ASTNode, *args)
     end
 
     # A convenient addition to `#test` method that does the same
@@ -137,31 +141,6 @@ module Ameba::Rule
       subclasses.each_with_object([] of Base.class) do |klass, obj|
         klass.abstract? ? obj.concat(klass.inherited_rules) : (obj << klass)
       end
-    end
-
-    private macro read_type_doc(filepath = __FILE__)
-      {{ run("../../contrib/read_type_doc",
-           @type.name.split("::").last,
-           filepath
-         ).chomp.stringify }}.presence
-    end
-
-    macro inherited
-      # Returns documentation for this rule, if there is any.
-      #
-      # ```
-      # module Ameba
-      #   # This is a test rule.
-      #   # Does nothing.
-      #   class MyRule < Ameba::Rule::Base
-      #     def test(source)
-      #     end
-      #   end
-      # end
-      #
-      # MyRule.parsed_doc # => "This is a test rule.\nDoes nothing."
-      # ```
-      class_getter parsed_doc : String? = read_type_doc
     end
   end
 

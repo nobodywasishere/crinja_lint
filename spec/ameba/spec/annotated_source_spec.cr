@@ -6,8 +6,8 @@ private def dummy_issue(code,
                         end_position : {Int32, Int32}?,
                         path = "")
   location, end_location = nil, nil
-  location = Crystal::Location.new(path, *position) if position
-  end_location = Crystal::Location.new(path, *end_position) if end_position
+  location = Crinja::Parser::StreamPosition.new(path, *position) if position
+  end_location = Crinja::Parser::StreamPosition.new(path, *end_position) if end_position
 
   Ameba::Issue.new(
     code: code,

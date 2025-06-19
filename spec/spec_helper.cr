@@ -46,62 +46,6 @@ module Ameba
     end
   end
 
-  class ScopeRule < Rule::Base
-    @[YAML::Field(ignore: true)]
-    getter scopes = [] of AST::Scope
-
-    properties do
-      description "Internal rule to test scopes"
-    end
-
-    def test(source, node : Crystal::VisibilityModifier, scope : AST::Scope)
-    end
-
-    def test(source, node : Crystal::ASTNode, scope : AST::Scope)
-      @scopes << scope
-    end
-  end
-
-  class SelfCallsRule < Rule::Base
-    @[YAML::Field(ignore: true)]
-    getter call_queue = {} of AST::Scope => Array(Crystal::Call)
-
-    properties do
-      description "Internal rule to test calls to `self` in scopes"
-    end
-
-    def test(source, node : Crystal::Call, scope : AST::Scope)
-      @call_queue[scope] ||= [] of Crystal::Call
-      @call_queue[scope] << node
-    end
-  end
-
-  class FlowExpressionRule < Rule::Base
-    @[YAML::Field(ignore: true)]
-    getter expressions = [] of AST::FlowExpression
-
-    properties do
-      description "Internal rule to test flow expressions"
-    end
-
-    def test(source, node, flow_expression : AST::FlowExpression)
-      @expressions << flow_expression
-    end
-  end
-
-  class RedundantControlExpressionRule < Rule::Base
-    @[YAML::Field(ignore: true)]
-    getter nodes = [] of Crystal::ASTNode
-
-    properties do
-      description "Internal rule to test redundant control expressions"
-    end
-
-    def test(source, node, visitor : AST::RedundantControlExpressionVisitor)
-      nodes << node
-    end
-  end
-
   # A rule that always raises an error
   class RaiseRule < Rule::Base
     property? should_raise = false
@@ -115,19 +59,7 @@ module Ameba
     end
   end
 
-  class PerfRule < Rule::Performance::Base
-    properties do
-      description "Sample performance rule"
-    end
-
-    def test(source)
-      issue_for({1, 1}, "Poor performance")
-    end
-  end
-
   class AtoAA < Rule::Base
-    include AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -143,8 +75,6 @@ module Ameba
   end
 
   class AtoB < Rule::Base
-    include AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -160,8 +90,6 @@ module Ameba
   end
 
   class BtoA < Rule::Base
-    include AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -177,8 +105,6 @@ module Ameba
   end
 
   class BtoC < Rule::Base
-    include AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -194,8 +120,6 @@ module Ameba
   end
 
   class CtoA < Rule::Base
-    include AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -211,8 +135,6 @@ module Ameba
   end
 
   class ClassToModule < Ameba::Rule::Base
-    include Ameba::AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end
@@ -229,8 +151,6 @@ module Ameba
   end
 
   class ModuleToClass < Ameba::Rule::Base
-    include Ameba::AST::Util
-
     properties do
       description "This rule is only used to test infinite loop detection"
     end

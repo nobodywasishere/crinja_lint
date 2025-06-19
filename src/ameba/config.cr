@@ -51,21 +51,20 @@ class Ameba::Config
 
   XDG_CONFIG_HOME = ENV.fetch("XDG_CONFIG_HOME", "~/.config")
 
-  FILENAME      = ".ameba.yml"
+  FILENAME      = ".crinja_lint.yml"
   DEFAULT_PATH  = Path[Dir.current] / FILENAME
   DEFAULT_PATHS = {
     Path["~"] / FILENAME,
-    Path[XDG_CONFIG_HOME] / "ameba/config.yml",
+    Path[XDG_CONFIG_HOME] / "crinja_lint/config.yml",
   }
 
   DEFAULT_GLOBS = %w[
-    **/*.cr
+    **/*.html.j2
+    **/*.jinja2
     !lib
+    !venv
+    !.venv
   ]
-
-  Ameba.ecr_supported? do
-    DEFAULT_GLOBS << "**/*.ecr"
-  end
 
   getter rules : Array(Rule::Base)
   property severity = Severity::Convention
@@ -181,7 +180,7 @@ class Ameba::Config
       [Source.new(STDIN.gets_to_end, file)]
     else
       (find_files_by_globs(globs) - find_files_by_globs(excluded))
-        .map { |path| Source.new File.read(path), path }
+        .map { |path| Source.new(File.read(path), path).as(Source) }
     end
   end
 

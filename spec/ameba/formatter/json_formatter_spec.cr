@@ -14,8 +14,8 @@ end
 module Ameba::Formatter
   describe JSONFormatter do
     context "metadata" do
-      it "shows ameba version" do
-        get_result["metadata"]["ameba_version"].should eq Ameba::VERSION
+      it "shows crinja_lint version" do
+        get_result["metadata"]["crinja_lint_version"].should eq Ameba::VERSION
       end
 
       it "shows crystal version" do
@@ -66,8 +66,8 @@ module Ameba::Formatter
       it "shows issue end_location" do
         s = Source.new
         s.add_issue DummyRule.new,
-          Crystal::Location.new("path", 3, 3),
-          Crystal::Location.new("path", 5, 4),
+          Crinja::Parser::StreamPosition.new("path", 3, 3),
+          Crinja::Parser::StreamPosition.new("path", 5, 4),
           "message"
 
         result = get_result [s]

@@ -37,7 +37,7 @@ module Ameba
     #   Time.epoch(1483859302)
     # end
     # ```
-    def location_disabled?(location : Crystal::Location?, rule)
+    def location_disabled?(location : Crinja::Parser::StreamPosition?, rule)
       return false if rule.name.in?(Rule::SPECIAL)
       return false unless line_number = location.try &.line_number.try &.- 1
       return false unless line = lines[line_number]?

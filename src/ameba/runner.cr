@@ -43,9 +43,6 @@ module Ameba
     # A syntax rule which always inspects a source first
     @syntax_rule = Rule::Lint::Syntax.new
 
-    # Checks for unneeded disable directives. Always inspects a source last
-    @unneeded_disable_directive_rule : Rule::Base?
-
     # Returns `true` if correctable issues should be autocorrected.
     private getter? autocorrect : Bool
 
@@ -72,12 +69,10 @@ module Ameba
       )
     end
 
-    protected def initialize(rules, sources, @formatter, @severity, @autocorrect = false, @version = nil)
-      @sources = sources.sort_by(&.path)
+    protected def initialize(rules, @sources, @formatter, @severity, @autocorrect = false, @version = nil)
+      # @sources = sources.sort_by(&.path)
       @rules =
         rules.select { |rule| rule_runnable?(rule, @version) }
-      @unneeded_disable_directive_rule =
-        rules.find &.class.==(Rule::Lint::UnneededDisableDirective)
     end
 
     protected def rule_runnable?(rule, version)
@@ -145,7 +140,6 @@ module Ameba
           next if rule.excluded?(source)
           rule.test(source)
         end
-        check_unneeded_directives(source)
         break unless autocorrect? && source.correct!
 
         # The issues that couldn't be corrected will be found again so we
@@ -160,7 +154,7 @@ module Ameba
 
       File.write(source.path, source.code) unless corrected_issues.empty?
     ensure
-      missing_location = Crystal::Location.new(nil, 0, 0)
+      missing_location = Crinja::Parser::StreamPosition.new
       source.issues.sort_by! do |issue|
         location = issue.location || missing_location
         {
@@ -238,13 +232,6 @@ module Ameba
       end
 
       processed_sources << checksum
-    end
-
-    private def check_unneeded_directives(source)
-      return unless rule = @unneeded_disable_directive_rule
-      return unless rule.enabled?
-
-      rule.test(source)
     end
   end
 end

@@ -2,6 +2,8 @@
 /lib/
 /bin/ameba
 /bin/ameba.dwarf
+/bin/crinja_lint
+/bin/crinja_lint.dwarf
 /.shards/
 
 # Libraries don't need dependency lock

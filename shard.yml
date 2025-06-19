@@ -1,21 +1,25 @@
-name: ameba
-version: 1.7.0-dev
+name: crinja_lint
+version: 0.1.0-dev
 
 authors:
   - Vitalii Elenhaupt <velenhaupt@gmail.com>
   - Sijawusz Pur Rahnama <sija@sija.pl>
+  - Margret Riegert <margret@eowyn.net>
 
 targets:
-  ameba:
+  crinja_lint:
     main: src/cli.cr
+
+dependencies:
+  crinja:
+    github: straight-shoota/crinja
 
 scripts:
   postinstall: shards build -Dpreview_mt
 
 # TODO: remove pre-compiled executable in future releases
 executables:
-  - ameba
-  - ameba.cr
+  - crinja_lint
 
 crystal: ~> 1.10
 

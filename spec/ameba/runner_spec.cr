@@ -8,7 +8,6 @@ module Ameba
 
     config.update_rule VersionedRule.rule_name, enabled: false
     config.update_rule ErrorRule.rule_name, enabled: false
-    config.update_rule PerfRule.rule_name, enabled: false
     config.update_rule AtoAA.rule_name, enabled: false
     config.update_rule AtoB.rule_name, enabled: false
     config.update_rule BtoA.rule_name, enabled: false
@@ -51,7 +50,7 @@ module Ameba
 
       it "checks accordingly to the rule #since_version" do
         rules = [VersionedRule.new] of Rule::Base
-        source = Source.new path: "source.cr"
+        source = Source.new "", "source.cr"
 
         v1_0_0 = SemanticVersion.parse("1.0.0")
         Runner.new(rules, [source], formatter, default_severity, false, v1_0_0).run.success?.should be_true
@@ -91,48 +90,11 @@ module Ameba
           rule = RaiseRule.new
           rule.should_raise = true
           rules = [rule] of Rule::Base
-          source = Source.new path: "source.cr"
+          source = Source.new "", "source.cr"
 
           expect_raises(Exception, "something went wrong") do
             Runner.new(rules, [source], formatter, default_severity).run
           end
-        end
-      end
-
-      context "invalid syntax" do
-        it "reports a syntax error" do
-          rules = [Rule::Lint::Syntax.new] of Rule::Base
-          source = Source.new "def bad_syntax"
-
-          Runner.new(rules, [source], formatter, default_severity).run
-          source.should_not be_valid
-          source.issues.first.rule.name.should eq Rule::Lint::Syntax.rule_name
-        end
-
-        it "does not run other rules" do
-          rules = [Rule::Lint::Syntax.new, Rule::Naming::ConstantNames.new] of Rule::Base
-          source = Source.new <<-CRYSTAL
-            MyBadConstant = 1
-
-            when my_bad_syntax
-            CRYSTAL
-
-          Runner.new(rules, [source], formatter, default_severity).run
-          source.should_not be_valid
-          source.issues.size.should eq 1
-        end
-      end
-
-      context "unneeded disables" do
-        it "reports an issue if such disable exists" do
-          rules = [Rule::Lint::UnneededDisableDirective.new] of Rule::Base
-          source = Source.new <<-CRYSTAL
-            a = 1 # ameba:disable LineLength
-            CRYSTAL
-
-          Runner.new(rules, [source], formatter, default_severity).run
-          source.should_not be_valid
-          source.issues.first.rule.name.should eq Rule::Lint::UnneededDisableDirective.rule_name
         end
       end
 
@@ -187,14 +149,14 @@ module Ameba
 
       it "returns false if there are invalid sources" do
         rules = Rule.rules.map &.new.as(Rule::Base)
-        source = Source.new "WrongConstant = 5"
+        source = Source.new "WrongConstant = 5", ""
 
         Runner.new(rules, [source], formatter, default_severity).run.success?.should be_false
       end
 
       it "depends on the level of severity" do
         rules = Rule.rules.map &.new.as(Rule::Base)
-        source = Source.new "WrongConstant = 5\n"
+        source = Source.new "WrongConstant = 5\n", ""
 
         Runner.new(rules, [source], formatter, :error).run.success?.should be_true
         Runner.new(rules, [source], formatter, :warning).run.success?.should be_true
@@ -203,7 +165,7 @@ module Ameba
 
       it "returns false if issue is disabled" do
         rules = [NamedRule.new] of Rule::Base
-        source = Source.new <<-CRYSTAL
+        source = Source.new <<-CRYSTAL, ""
           def foo
             bar = 1 # ameba:disable #{NamedRule.name}
           end

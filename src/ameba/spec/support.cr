@@ -8,8 +8,9 @@ module Ameba
   class Source
     include Spec::Util
 
-    def initialize(code : String, @path = "", normalize = true)
-      @code = normalize ? normalize_code(code) : code
+    def self.new(code : String, path : String, normalize : Bool) : self
+      code = normalize ? normalize_code(code) : code
+      new(code, path)
     end
   end
 end

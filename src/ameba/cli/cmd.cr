@@ -67,7 +67,7 @@ module Ameba::Cli
 
   def parse_args(args, opts = Opts.new)
     OptionParser.parse(args) do |parser|
-      parser.banner = "Usage: ameba [options] [file1 file2 ...]"
+      parser.banner = "Usage: crinja_lint [options] [file1 file2 ...]"
 
       parser.on("-v", "--version", "Print version") { print_version }
       parser.on("-h", "--help", "Show this help") { print_help(parser) }

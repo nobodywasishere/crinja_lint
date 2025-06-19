@@ -21,11 +21,6 @@ module Ameba::Presenter
         output_title "Description"
         output_paragraph rule_description
       end
-
-      if rule_doc = colorize_code_fences(rule.class.parsed_doc)
-        output_title "Detailed description"
-        output_paragraph rule_doc
-      end
     end
 
     private def output_title(title)

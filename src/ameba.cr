@@ -1,3 +1,5 @@
+require "crinja"
+
 # Ameba's entry module.
 #
 # To run the linter with default parameters:
@@ -19,12 +21,6 @@ module Ameba
   extend self
 
   VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
-
-  macro ecr_supported?(&)
-    {% if compare_versions(Crystal::VERSION, "1.15.0") >= 0 %}
-      {{ yield }}
-    {% end %}
-  end
 
   # Initializes `Ameba::Runner` and runs it.
   # Can be configured via `config` parameter.

@@ -19,7 +19,7 @@ module Ameba::Formatter
 
       it "writes invalid source" do
         source = Source.new path: "/path/to/file.cr"
-        location = Crystal::Location.new("/path/to/file.cr", 1, 2)
+        location = Crinja::Parser::StreamPosition.new("/path/to/file.cr", 1, 2)
 
         source.add_issue DummyRule.new, location, location, "message\n2nd line"
 
