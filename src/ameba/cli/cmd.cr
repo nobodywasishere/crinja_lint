@@ -23,10 +23,14 @@ module Ameba::Cli
     property? colors = true
     property? without_affected_code = false
     property? autocorrect = false
+    property? lsp = false
   end
 
+  # ameba:disable Metrics/CyclomaticComplexity
   def run(args = ARGV) : Nil
     opts = parse_args(args)
+
+    Ameba::Lsp.run if opts.lsp?
 
     if (location_to_explain = opts.location_to_explain) && opts.autocorrect?
       raise "Invalid usage: Cannot explain an issue and autocorrect at the same time."
@@ -72,6 +76,7 @@ module Ameba::Cli
       parser.on("-v", "--version", "Print version") { print_version }
       parser.on("-h", "--help", "Show this help") { print_help(parser) }
       parser.on("-r", "--rules", "Show all available rules") { opts.rules = true }
+      parser.on("--lsp", "Start language server") { opts.lsp = true }
       parser.on("-R", "--rule-versions", "Show all available rule versions") { opts.rule_versions = true }
       parser.on("-s", "--silent", "Disable output") { opts.formatter = :silent }
       parser.unknown_args do |arr|

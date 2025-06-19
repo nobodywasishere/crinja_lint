@@ -13,6 +13,8 @@ targets:
 dependencies:
   crinja:
     github: straight-shoota/crinja
+  larimar:
+    github: nobodywasishere/larimar
 
 scripts:
   postinstall: shards build -Dpreview_mt

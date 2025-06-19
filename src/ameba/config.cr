@@ -166,6 +166,8 @@ class Ameba::Config
     AVAILABLE_FORMATTERS.keys.join('|')
   end
 
+  property sources : Array(Source)?
+
   # Returns a list of sources matching globs and excluded sections.
   #
   # ```
@@ -176,12 +178,12 @@ class Ameba::Config
   # config.sources # => list of sources pointing to files found by the wildcards
   # ```
   def sources
-    if file = stdin_filename
-      [Source.new(STDIN.gets_to_end, file)]
-    else
-      (find_files_by_globs(globs) - find_files_by_globs(excluded))
-        .map { |path| Source.new(File.read(path), path).as(Source) }
-    end
+    @sources ||= if file = stdin_filename
+                   [Source.new(STDIN.gets_to_end, file)]
+                 else
+                   (find_files_by_globs(globs) - find_files_by_globs(excluded))
+                     .map { |path| Source.new(File.read(path), path).as(Source) }
+                 end
   end
 
   # Returns a formatter to be used while inspecting files.
