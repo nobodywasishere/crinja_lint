@@ -131,8 +131,8 @@ class Ameba::Source
       @rewriter.remove(end_pos - size, end_pos)
     end
 
-    private def loc_to_pos(location : Crystal::Location | {Int32, Int32})
-      if location.is_a?(Crystal::Location)
+    private def loc_to_pos(location : Crinja::Parser::StreamPosition | {Int32, Int32})
+      if location.is_a?(Crinja::Parser::StreamPosition)
         line, column = location.line_number, location.column_number
       else
         line, column = location
