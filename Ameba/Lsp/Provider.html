@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.15.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="crinja_lint">
+
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+  <meta name="repository-name" content="crinja_lint">
+  <title>Ameba::Lsp::Provider - crinja_lint master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          crinja_lint
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="crinja_lint/Ameba" data-name="ameba">
+      <a href="../../Ameba.html">Ameba</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/AST" data-name="ameba::ast">
+      <a href="../../Ameba/AST.html">AST</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/AST/NodeVisitor" data-name="ameba::ast::nodevisitor">
+      <a href="../../Ameba/AST/NodeVisitor.html">NodeVisitor</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/AST/TagVisitor" data-name="ameba::ast::tagvisitor">
+      <a href="../../Ameba/AST/TagVisitor.html">TagVisitor</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Config" data-name="ameba::config">
+      <a href="../../Ameba/Config.html">Config</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Formatter" data-name="ameba::formatter">
+      <a href="../../Ameba/Formatter.html">Formatter</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/BaseFormatter" data-name="ameba::formatter::baseformatter">
+      <a href="../../Ameba/Formatter/BaseFormatter.html">BaseFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/DisabledFormatter" data-name="ameba::formatter::disabledformatter">
+      <a href="../../Ameba/Formatter/DisabledFormatter.html">DisabledFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/DotFormatter" data-name="ameba::formatter::dotformatter">
+      <a href="../../Ameba/Formatter/DotFormatter.html">DotFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/ExplainFormatter" data-name="ameba::formatter::explainformatter">
+      <a href="../../Ameba/Formatter/ExplainFormatter.html">ExplainFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/FlycheckFormatter" data-name="ameba::formatter::flycheckformatter">
+      <a href="../../Ameba/Formatter/FlycheckFormatter.html">FlycheckFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/GitHubActionsFormatter" data-name="ameba::formatter::githubactionsformatter">
+      <a href="../../Ameba/Formatter/GitHubActionsFormatter.html">GitHubActionsFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/JSONFormatter" data-name="ameba::formatter::jsonformatter">
+      <a href="../../Ameba/Formatter/JSONFormatter.html">JSONFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/TODOFormatter" data-name="ameba::formatter::todoformatter">
+      <a href="../../Ameba/Formatter/TODOFormatter.html">TODOFormatter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Formatter/Util" data-name="ameba::formatter::util">
+      <a href="../../Ameba/Formatter/Util.html">Util</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/GlobUtils" data-name="ameba::globutils">
+      <a href="../../Ameba/GlobUtils.html">GlobUtils</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/InlineComments" data-name="ameba::inlinecomments">
+      <a href="../../Ameba/InlineComments.html">InlineComments</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/InlineComments/Action" data-name="ameba::inlinecomments::action">
+      <a href="../../Ameba/InlineComments/Action.html">Action</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Issue" data-name="ameba::issue">
+      <a href="../../Ameba/Issue.html">Issue</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Issue/Status" data-name="ameba::issue::status">
+      <a href="../../Ameba/Issue/Status.html">Status</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="crinja_lint/Ameba/Lsp" data-name="ameba::lsp">
+      <a href="../../Ameba/Lsp.html">Lsp</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="crinja_lint/Ameba/Lsp/Provider" data-name="ameba::lsp::provider">
+      <a href="../../Ameba/Lsp/Provider.html">Provider</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Lsp/Provider/DiagnosticsFormatter" data-name="ameba::lsp::provider::diagnosticsformatter">
+      <a href="../../Ameba/Lsp/Provider/DiagnosticsFormatter.html">DiagnosticsFormatter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Presenter" data-name="ameba::presenter">
+      <a href="../../Ameba/Presenter.html">Presenter</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Presenter/BasePresenter" data-name="ameba::presenter::basepresenter">
+      <a href="../../Ameba/Presenter/BasePresenter.html">BasePresenter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Presenter/RuleCollectionPresenter" data-name="ameba::presenter::rulecollectionpresenter">
+      <a href="../../Ameba/Presenter/RuleCollectionPresenter.html">RuleCollectionPresenter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Presenter/RulePresenter" data-name="ameba::presenter::rulepresenter">
+      <a href="../../Ameba/Presenter/RulePresenter.html">RulePresenter</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Presenter/RuleVersionsPresenter" data-name="ameba::presenter::ruleversionspresenter">
+      <a href="../../Ameba/Presenter/RuleVersionsPresenter.html">RuleVersionsPresenter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Reportable" data-name="ameba::reportable">
+      <a href="../../Ameba/Reportable.html">Reportable</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule" data-name="ameba::rule">
+      <a href="../../Ameba/Rule.html">Rule</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Base" data-name="ameba::rule::base">
+      <a href="../../Ameba/Rule/Base.html">Base</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule/Layout" data-name="ameba::rule::layout">
+      <a href="../../Ameba/Rule/Layout.html">Layout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Layout/LineLength" data-name="ameba::rule::layout::linelength">
+      <a href="../../Ameba/Rule/Layout/LineLength.html">LineLength</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Layout/TrailingBlankLines" data-name="ameba::rule::layout::trailingblanklines">
+      <a href="../../Ameba/Rule/Layout/TrailingBlankLines.html">TrailingBlankLines</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Layout/TrailingWhitespace" data-name="ameba::rule::layout::trailingwhitespace">
+      <a href="../../Ameba/Rule/Layout/TrailingWhitespace.html">TrailingWhitespace</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule/Lint" data-name="ameba::rule::lint">
+      <a href="../../Ameba/Rule/Lint.html">Lint</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Lint/Syntax" data-name="ameba::rule::lint::syntax">
+      <a href="../../Ameba/Rule/Lint/Syntax.html">Syntax</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Lint/Tag" data-name="ameba::rule::lint::tag">
+      <a href="../../Ameba/Rule/Lint/Tag.html">Tag</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule/Lint/UselessAssign" data-name="ameba::rule::lint::uselessassign">
+      <a href="../../Ameba/Rule/Lint/UselessAssign.html">UselessAssign</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Lint/UselessAssign/AssignVisitor" data-name="ameba::rule::lint::uselessassign::assignvisitor">
+      <a href="../../Ameba/Rule/Lint/UselessAssign/AssignVisitor.html">AssignVisitor</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule/Style" data-name="ameba::rule::style">
+      <a href="../../Ameba/Rule/Style.html">Style</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Rule/Style/BlockEndTagName" data-name="ameba::rule::style::blockendtagname">
+      <a href="../../Ameba/Rule/Style/BlockEndTagName.html">BlockEndTagName</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Style/BlockEndTagName/BlockTagVisitor" data-name="ameba::rule::style::blockendtagname::blocktagvisitor">
+      <a href="../../Ameba/Rule/Style/BlockEndTagName/BlockTagVisitor.html">BlockTagVisitor</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Rule/Style/StringLiteralInExpression" data-name="ameba::rule::style::stringliteralinexpression">
+      <a href="../../Ameba/Rule/Style/StringLiteralInExpression.html">StringLiteralInExpression</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Runner" data-name="ameba::runner">
+      <a href="../../Ameba/Runner.html">Runner</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Runner/InfiniteCorrectionLoopError" data-name="ameba::runner::infinitecorrectionlooperror">
+      <a href="../../Ameba/Runner/InfiniteCorrectionLoopError.html">InfiniteCorrectionLoopError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Severity" data-name="ameba::severity">
+      <a href="../../Ameba/Severity.html">Severity</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/SeverityYamlConverter" data-name="ameba::severityyamlconverter">
+      <a href="../../Ameba/SeverityYamlConverter.html">SeverityYamlConverter</a>
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Source" data-name="ameba::source">
+      <a href="../../Ameba/Source.html">Source</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Source/Corrector" data-name="ameba::source::corrector">
+      <a href="../../Ameba/Source/Corrector.html">Corrector</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Source/Rewriter" data-name="ameba::source::rewriter">
+      <a href="../../Ameba/Source/Rewriter.html">Rewriter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="crinja_lint/Ameba/Spec" data-name="ameba::spec">
+      <a href="../../Ameba/Spec.html">Spec</a>
+      
+        <ul>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Spec/AnnotatedSource" data-name="ameba::spec::annotatedsource">
+      <a href="../../Ameba/Spec/AnnotatedSource.html">AnnotatedSource</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Spec/BeValid" data-name="ameba::spec::bevalid">
+      <a href="../../Ameba/Spec/BeValid.html">BeValid</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Spec/BeValidExpectation" data-name="ameba::spec::bevalidexpectation">
+      <a href="../../Ameba/Spec/BeValidExpectation.html">BeValidExpectation</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Spec/ExpectIssue" data-name="ameba::spec::expectissue">
+      <a href="../../Ameba/Spec/ExpectIssue.html">ExpectIssue</a>
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Spec/Util" data-name="ameba::spec::util">
+      <a href="../../Ameba/Spec/Util.html">Util</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="crinja_lint/Ameba/Tokenizer" data-name="ameba::tokenizer">
+      <a href="../../Ameba/Tokenizer.html">Tokenizer</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    class
+  </span> Ameba::<wbr>Lsp::<wbr>Provider
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Ameba/Lsp/Provider.html">Ameba::Lsp::Provider</a></li><li class="superclass">Larimar::Provider</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Larimar::CodeActionProvider</li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L2" target="_blank">
+        ameba/lsp/provider.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="Log">
+        <strong>Log</strong> = <code><span class="t">::</span><span class="t">Larimar</span><span class="t">::</span><span class="t">Log</span>.<span class="k">for</span>(<span class="k">self</span>)</code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#on_change%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method" class="signature"><strong>#on_change</strong>(document : Larimar::TextDocument) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_close%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method" class="signature"><strong>#on_close</strong>(document : Larimar::TextDocument) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_open%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method" class="signature"><strong>#on_open</strong>(document : Larimar::TextDocument) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_save%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method" class="signature"><strong>#on_save</strong>(document : Larimar::TextDocument) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#provide_code_actions%28document%3ALarimar%3A%3ATextDocument%2Crange%3ALSProtocol%3A%3ARange%7CLSProtocol%3A%3ASelectionRange%2Ccontext%3ALSProtocol%3A%3ACodeActionContext%2Ctoken%3ACancellationToken%7CNil%29%3AArray%28LSProtocol%3A%3ACodeAction%7CLSProtocol%3A%3ACommand%29%7CNil-instance-method" class="signature"><strong>#provide_code_actions</strong>(document : Larimar::TextDocument, range : LSProtocol::Range | LSProtocol::SelectionRange, context : LSProtocol::CodeActionContext, token : CancellationToken | Nil) : Array(LSProtocol::CodeAction | LSProtocol::Command) | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#resolve_code_action%28code_action%3ALSProtocol%3A%3ACodeAction%2Ctoken%3ACancellationToken%7CNil%29%3ALSProtocol%3A%3ACodeAction%7CNil-instance-method" class="signature"><strong>#resolve_code_action</strong>(code_action : LSProtocol::CodeAction, token : CancellationToken | Nil) : LSProtocol::CodeAction | Nil</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="on_change(document:Larimar::TextDocument):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>on_change</strong>(document : Larimar::TextDocument) : Nil
+
+        <a class="method-permalink" href="#on_change%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L60" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_close(document:Larimar::TextDocument):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>on_close</strong>(document : Larimar::TextDocument) : Nil
+
+        <a class="method-permalink" href="#on_close%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_open(document:Larimar::TextDocument):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>on_open</strong>(document : Larimar::TextDocument) : Nil
+
+        <a class="method-permalink" href="#on_open%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_save(document:Larimar::TextDocument):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>on_save</strong>(document : Larimar::TextDocument) : Nil
+
+        <a class="method-permalink" href="#on_save%28document%3ALarimar%3A%3ATextDocument%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="provide_code_actions(document:Larimar::TextDocument,range:LSProtocol::Range|LSProtocol::SelectionRange,context:LSProtocol::CodeActionContext,token:CancellationToken|Nil):Array(LSProtocol::CodeAction|LSProtocol::Command)|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>provide_code_actions</strong>(document : Larimar::TextDocument, range : LSProtocol::Range | LSProtocol::SelectionRange, context : LSProtocol::CodeActionContext, token : CancellationToken | Nil) : Array(LSProtocol::CodeAction | LSProtocol::Command) | Nil
+
+        <a class="method-permalink" href="#provide_code_actions%28document%3ALarimar%3A%3ATextDocument%2Crange%3ALSProtocol%3A%3ARange%7CLSProtocol%3A%3ASelectionRange%2Ccontext%3ALSProtocol%3A%3ACodeActionContext%2Ctoken%3ACancellationToken%7CNil%29%3AArray%28LSProtocol%3A%3ACodeAction%7CLSProtocol%3A%3ACommand%29%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L121" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="resolve_code_action(code_action:LSProtocol::CodeAction,token:CancellationToken|Nil):LSProtocol::CodeAction|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>resolve_code_action</strong>(code_action : LSProtocol::CodeAction, token : CancellationToken | Nil) : LSProtocol::CodeAction | Nil
+
+        <a class="method-permalink" href="#resolve_code_action%28code_action%3ALSProtocol%3A%3ACodeAction%2Ctoken%3ACancellationToken%7CNil%29%3ALSProtocol%3A%3ACodeAction%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/nobodywasishere/crinja_lint/blob/7d65aa4/src/ameba/lsp/provider.cr#L154" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>
