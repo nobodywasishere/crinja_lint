@@ -37,11 +37,11 @@ struct Crinja::Parser::StreamPosition
   #   self.class.new(@filename, line_number, column_number)
   # end
 
-  # # Returns the same location as this location but with the line and/or
-  # # column number(s) adjusted by the given amount(s).
-  # def adjust(line_number = 0, column_number = 0) : self
-  #   self.class.new(@filename, @line + line_number, @column + column_number)
-  # end
+  # Returns the same location as this location but with the line and/or
+  # column number(s) adjusted by the given amount(s).
+  def adjust(line_number = 0, column_number = 0) : self
+    self.class.new(@filename, @line + line_number, @column + column_number)
+  end
 
   # # Seeks to a given *offset* relative to `self`.
   # def seek(offset : self) : self
