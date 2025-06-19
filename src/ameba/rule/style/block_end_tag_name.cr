@@ -38,24 +38,24 @@ module Ameba::Rule
           if name.value != expected_name
             source.add_issue(
               self,
-              node.location_start,
-              node.location_end,
+              location_start(node),
+              location_end(node),
               MSG_NAME_MISMATCH % {name.value, expected_name},
             )
           end
         else
           source.add_issue(
             self,
-            node.location_start,
-            node.location_end,
+            location_start(node),
+            location_end(node),
             MSG_NO_NAME % expected_name,
           )
         end
       elsif node.arguments.size > 0 && !node.arguments.first.kind.eof?
         source.add_issue(
           self,
-          node.location_start,
-          node.location_end,
+          location_start(node),
+          location_end(node),
           MSG_END_TAG_NAME % (node.name || "unknown name"),
         )
       end

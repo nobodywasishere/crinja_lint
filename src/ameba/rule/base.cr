@@ -98,6 +98,18 @@ module Ameba::Rule
       end
     end
 
+    private macro location_start(node, source = "source")
+      if (location_start = {{ node.id }}.location_start)
+        Crinja::Parser::StreamPosition.new({{source.id}}.path, location_start.line, location_start.column)
+      end
+    end
+
+    private macro location_end(node, source = "source")
+      if (location_end = {{ node.id }}.location_end)
+        Crinja::Parser::StreamPosition.new({{source.id}}.path, location_end.line, location_end.column)
+      end
+    end
+
     # Returns `true` if this rule is special and behaves differently than
     # usual rules.
     #

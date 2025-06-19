@@ -14,8 +14,8 @@ module Ameba::Rule
     rescue ex : Crinja::Error
       source.add_issue(
         self,
-        ex.location_start,
-        ex.location_end,
+        location_start(ex),
+        location_end(ex),
         ex.message.split("\n").first
       )
     end

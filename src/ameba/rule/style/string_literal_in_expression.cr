@@ -12,8 +12,8 @@ module Ameba::Rule
 
       source.add_issue(
         self,
-        node.location_start,
-        node.location_end,
+        location_start(node),
+        location_end(node),
         MSG,
       )
     end

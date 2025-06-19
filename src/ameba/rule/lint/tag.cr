@@ -16,29 +16,29 @@ module Ameba::Rule
     rescue ex : Crinja::TemplateSyntaxError
       source.add_issue(
         self,
-        ex.location_start,
-        ex.location_end,
+        location_start(ex),
+        location_end(ex),
         ex.message.split("\n").first,
       )
     rescue Crinja::SecurityError
       source.add_issue(
         self,
-        node.location_start,
-        node.location_end,
+        location_start(node),
+        location_end(node),
         MSG_SECURITY % node.name,
       )
     rescue Crinja::FeatureLibrary::UnknownFeatureError
       source.add_issue(
         self,
-        node.location_start,
-        node.location_end,
+        location_start(node),
+        location_end(node),
         MSG_UNKNOWN % node.name,
       )
     rescue ex
       source.add_issue(
         self,
-        node.location_start,
-        node.location_end,
+        location_start(node),
+        location_end(node),
         ex.message.try &.split("\n").first || "Unknown error",
       )
     end
