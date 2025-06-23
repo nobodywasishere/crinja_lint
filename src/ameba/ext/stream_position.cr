@@ -1,6 +1,10 @@
 struct Crinja::Parser::StreamPosition
   include Comparable(self)
 
+  property pos : Int32 = 0
+  property line : Int32 = 0
+  property column : Int32 = 0
+
   property filename : String?
 
   def initialize
