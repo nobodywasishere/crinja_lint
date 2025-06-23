@@ -99,13 +99,13 @@ module Ameba::Rule
     end
 
     private macro location_start(node, source = "source")
-      if (location_start = {{ node.id }}.location_start)
+      if {{node}}.responds_to?(:location_start) && (location_start = {{ node.id }}.location_start)
         Crinja::Parser::StreamPosition.new({{source.id}}.path, location_start.line, location_start.column)
       end
     end
 
     private macro location_end(node, source = "source")
-      if (location_end = {{ node.id }}.location_end)
+      if {{node}}.responds_to?(:location_end) && (location_end = {{ node.id }}.location_end)
         Crinja::Parser::StreamPosition.new({{source.id}}.path, location_end.line, location_end.column)
       end
     end

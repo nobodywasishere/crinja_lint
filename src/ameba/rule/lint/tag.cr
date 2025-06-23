@@ -14,32 +14,21 @@ module Ameba::Rule
 
       tag.validate_arguments(node, source.env)
     rescue ex : Crinja::TemplateSyntaxError
-      source.add_issue(
-        self,
-        location_start(ex),
-        location_end(ex),
-        ex.message.split("\n").first,
-      )
-    rescue Crinja::SecurityError
-      source.add_issue(
-        self,
-        location_start(node),
-        location_end(node),
-        MSG_SECURITY % node.name,
-      )
-    rescue Crinja::FeatureLibrary::UnknownFeatureError
-      source.add_issue(
-        self,
-        location_start(node),
-        location_end(node),
-        MSG_UNKNOWN % node.name,
-      )
+      add_issue(source, node, ex, ex.message.split("\n").first)
+    rescue ex : Crinja::SecurityError
+      add_issue(source, node, ex, MSG_SECURITY % node.name)
+    rescue ex : Crinja::FeatureLibrary::UnknownFeatureError
+      add_issue(source, node, ex, MSG_UNKNOWN % node.name)
     rescue ex
+      add_issue(source, node, ex, ex.message.try &.split("\n").first || "Unknown error")
+    end
+
+    private def add_issue(source : Source, node, ex, msg : String)
       source.add_issue(
         self,
-        location_start(node),
-        location_end(node),
-        ex.message.try &.split("\n").first || "Unknown error",
+        location_start(ex) || location_start(node),
+        location_end(ex) || location_end(node),
+        msg
       )
     end
   end
