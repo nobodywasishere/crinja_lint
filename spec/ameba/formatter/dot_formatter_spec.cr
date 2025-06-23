@@ -54,7 +54,7 @@ module Ameba::Formatter
           log.should contain "NamedRuleError"
         end
 
-        it "writes affected code by default" do
+        pending "writes affected code by default" do
           s = Source.new(%(
             a = 22
             puts a

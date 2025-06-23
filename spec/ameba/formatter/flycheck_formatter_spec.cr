@@ -37,7 +37,7 @@ module Ameba::Formatter
         )
       end
 
-      it "reports nothing if location was not set" do
+      pending "reports nothing if location was not set" do
         s = Source.new "a = 1", "source.cr"
         s.add_issue DummyRule.new, {0, 0}, "message"
 

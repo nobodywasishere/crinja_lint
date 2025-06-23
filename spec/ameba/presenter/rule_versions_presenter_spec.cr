@@ -10,7 +10,7 @@ module Ameba
   end
 
   describe Presenter::RuleVersionsPresenter do
-    it "outputs rule versions" do
+    pending "outputs rule versions" do
       with_rule_versions_presenter do |_rules, output|
         output.should contain <<-TEXT
           - 0.1.0

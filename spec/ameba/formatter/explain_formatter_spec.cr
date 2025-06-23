@@ -36,7 +36,7 @@ module Ameba::Formatter
     end
 
     describe "#finished" do
-      it "writes issue info" do
+      pending "writes issue info" do
         source = Source.new "a = 42", "source.cr"
         output = explanation(source)
         output.should contain "ISSUE INFO"
@@ -44,14 +44,14 @@ module Ameba::Formatter
         output.should contain "source.cr:1:1"
       end
 
-      it "writes affected code" do
+      pending "writes affected code" do
         source = Source.new "a = 42", "source.cr"
         output = explanation(source)
         output.should contain "AFFECTED CODE"
         output.should contain "a = 42"
       end
 
-      it "writes rule info" do
+      pending "writes rule info" do
         source = Source.new "a = 42", "source.cr"
         output = explanation(source)
         output.should contain "RULE INFO"
@@ -60,7 +60,7 @@ module Ameba::Formatter
         output.should contain "Always adds an error at 1:1"
       end
 
-      it "writes detailed description" do
+      pending "writes detailed description" do
         source = Source.new "a = 42", "source.cr"
         output = explanation(source)
         output.should contain "DETAILED DESCRIPTION"

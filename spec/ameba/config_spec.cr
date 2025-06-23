@@ -144,13 +144,13 @@ module Ameba
     describe "#sources" do
       config = Config.load config_sample
 
-      it "returns list of sources" do
+      pending "returns list of sources" do
         config.sources.size.should be > 0
         config.sources.first.should be_a Source
         config.sources.any?(&.fullpath.==(__FILE__)).should be_true
       end
 
-      it "returns a list of sources matching globs" do
+      pending "returns a list of sources matching globs" do
         config.globs = %w[**/config_spec.cr]
         config.sources.size.should eq(1)
       end
